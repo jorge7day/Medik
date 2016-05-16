@@ -4,17 +4,25 @@
 		<meta charset="UTF-8">
 		<title>Medik</title>
 
-		<link rel="stylesheet" href="css/paciente_style.css">
-		<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
-		<script type="text/javascript" src="js/crearCita_controller.js"></script>
+		<link rel="stylesheet" href="../css/paciente_style.css">
+		<script type="text/javascript" src="../js/jquery-2.2.3.min.js"></script>
+		<script type="text/javascript" src="../js/crearCita_controller.js"></script>
 	</head>
 
 	<body>
 		<section id="inicio">
 			<header id="principal">
-				<img src="files/icon_microscope.png" id="logo">
+				<img src="../files/icon_microscope.png" id="logo">
 				<span id="titulo">Medik</span>
 			</header>
+			<nav>
+			<ul>
+				<li><a title="Opcion 1" href="mis_citas.php">Mis Citas</a></li>
+				<li><a title="Opcion 2" href="gestor_citas.php">Gestionar Citas</a></li>
+				<li><a title="Opcion 2" href="pacientes.php">Pacientes</a></li>
+				<li id="last_li"><a title="Opcion 2" href="#">Usuario</a></li>
+			</ul>
+			</nav>
 
 			<div id="parrafo">
 				<p> Si usted está afiliado a seguros Medik cree aqui su cita.</p>
@@ -22,14 +30,16 @@
 
 			<div id="buttons">
 				<div class="button" id="crearCita_btn" onclick="mostrarFormulario()">
-					<img src="files/icon_crear_citas.svg" id="img">
+					<img src="../files/icon_crear_citas.svg" id="img">
 					<p id="nombre">Crear cita</p>
 				</div>
 
-				<div class="button" id="consultarCitas_btn" onclick="mostrarFormulario()">
-					<img src="files/icon_ver_citas.svg" id="verCitas_img">
+				<!--<a href="consultar.php">-->
+				<div class="button" id="consultarCitas_btn" onclick="location.href='mis_citas.php'">
+					<img src="../files/icon_ver_citas.svg" id="verCitas_img">
 					<p id="consultarCitas_texto">Consultar citas</p>
 				</div>
+				<!--</a>-->
 			</div>
 		</section>
 

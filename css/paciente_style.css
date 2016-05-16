@@ -269,7 +269,7 @@ input {
 	margin-bottom: 30px;
 	padding: 7px;
 	box-sizing: border-box;
-	border: none;
+	border: 1px solid #B0D3EC;
 }
 
 footer {
@@ -279,4 +279,178 @@ footer {
 	text-align: center;
 	padding: 20px;
 	border-top: 2px solid #999999;
+}
+
+
+
+#citassection {
+	padding-top: 2em;
+	padding-left: 4em;
+	padding-right: 4em;
+	padding-bottom: 6em;
+	background-color: rgba(255, 255, 255, 0.9);
+	width: 60%;
+	margin: 0 auto;
+	font-family: MONOSPACE;
+}
+
+#citastable {
+	border-collapse: collapse;
+}
+
+#tr_tags {
+	background-color: #466e96;
+	color: white;
+	font-family: MiNuevaFuente;
+	text-align: center;
+	border-radius: 10px;
+}
+
+#tr_tags #first-child {
+	/*border-top-left-radius: 10px;*/
+
+}
+#tr_tags #last-child {
+	/*border-top-right-radius: 10px;*/
+}
+
+th {
+	padding: 10px;
+}
+
+#citastable {
+	border: 0px solid transparent;
+}
+
+td, tr {
+	border: 1px solid rgba(176, 193, 224, 0.18);
+}
+
+td, tr {
+	padding: 10px;
+	border-bottom: 1px solid #ddd;
+	background-color: #F3F2EE;
+}
+
+
+tbody {
+	text-align: center;
+
+}
+
+.btn_azul {
+  border: 0px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #3498db;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn_azul:hover {
+  background: #3cb0fd;
+  text-decoration: none;
+}
+.btn_azul:active {
+  background: #2c90dd;
+  text-decoration: none;
+}
+
+.btn_rojo {
+  border: 0px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #EC2424;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn_rojo:hover {
+  background: #fC4444;
+  text-decoration: none;
+}
+.btn_rojo:active {
+  background: #BC1414;
+  text-decoration: none;
+
+}
+
+.btn_con_img {
+	padding: 3px;
+	padding-bottom: 1px;
+}
+
+#img_btn {
+	width: 18px;
+
+}
+
+
+.trcita {
+	text-decoration: none;
+	color: #4EA5E4;
+}
+
+.trcita:hover {
+	text-decoration: underline;
+	color: #0A66A9;
+}
+
+#opciones {
+	margin: 2em;
+}
+
+
+nav {
+width: 100%;
+	display: block;
+	margin: 0 auto 20px;
+	border-top: 1px solid #333;
+	position: absolute;
+	background-color: #2c3e50;
+}
+
+nav ul{
+    list-style:none;
+    margin:0 10px 0 10px;
+    padding:0;
+	background-color: #2c3e50;
+}
+
+nav ul li{
+	font-family: Arial;
+    float:left;
+    font-size:16px;
+    margin-right:10px;
+    text-align:center;
+    /*Sombras para texto, los mismos parametros que box-shadow*/
+}
+
+nav ul li:hover{
+    background-color: #4c6e80;
+}
+
+nav ul li a{
+    color:#fff;
+    display:block;
+    padding:10px;
+    text-decoration:none;
+    /*Transiciones*/
+}
+
+nav ul #last_li {
+	float: right;
+}
+
+.label {
+	color: #4EA5E4;
+	font-size: 16px;
+}
+
+textarea {
+	width: 99%;
+	height: 200px;
+	resize: vertical;
 }
