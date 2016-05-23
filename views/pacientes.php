@@ -12,7 +12,7 @@
 	<body>
 		<section id="inicio">
 			<header id="principal">
-				<img src="../files/icon_microscope.png" id="logo">
+				<img src="../files/icon_microscope.svg" id="logo">
 				<span id="titulo">Medik</span>
 			</header>
 			<nav>
@@ -39,12 +39,19 @@
 			<table id="citastable" border="1" style="width:100%">
 			  <tr id="tr_tags">
 				<th id="first-child">Nombre Paciente</th>
+                <th>Sexo</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Teléfono</th>
 				<th>Programar Cita</th>
 			  </tr>
-				  <tr>
-					<td><a class="trcita" href="#">Eve asdf asdf</a></td>
-					<td><button onclick="crearCita('idpaciente')" class="btn_con_img"><img id="img_btn" src="../files/add_icon.png"></button></td>
-				  </tr>
+			  <!--INFORMACION DE LOS PACIENTES-->
+			  <tr>
+				<td><a class="trcita" href="#">Eve asdf asdf</a></td>
+				<td>Femenino</td>
+				<td>10/10/1983</td>
+				<td>2215-4038</td>
+				<td><button onclick="crearCita('idpaciente')" class="btn_con_img"><img id="img_btn" src="../files/add_icon.png"></button></td>
+			  </tr>
 
 			</table>
 

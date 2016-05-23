@@ -12,7 +12,7 @@
 	<body>
 		<section id="inicio">
 			<header id="principal">
-				<img src="../files/icon_microscope.png" id="logo">
+				<img src="../files/icon_microscope.svg" id="logo">
 				<span id="titulo">Medik</span>
 			</header>
 			<nav>
@@ -40,7 +40,9 @@
 			<p><b class="label">Fecha:</b> J1-2-1234<p>
 			<p><b class="label">Hora:</b> 12:00 AM<p>
 			<p><b class="label">Diagnostico:</b> Jose ksdljf sdfa jksdhflskjdfh alksjdhf alksdjhf aljksdhf aljksdfh aljksd hfakljsd hflk ajsdhfk jashfkjahfgakjshdgkjlahsd ljkjahsd kljahdf kjasdhf ljakhdf akjsdhfaljkdfh alksdfh asldjfh ajsdf hajlkdh fasdf<p>
-
+			<p><b class="label">Medicamento:</b>
+			Acetaminofén</p>
+			<p><b class="label">Dosis:</b> 1 dosis cada 12 horas</p>
 
 		</section>
 

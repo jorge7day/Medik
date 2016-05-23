@@ -61,6 +61,89 @@ body {
 	font-family: MiNuevaFuente;
 }
 
+#secf{
+    display: flex;
+    width: 100% auto;
+    height: 700px;
+
+    padding-top: 40px;
+    padding-left: 100px;
+
+
+}
+
+#formulario{
+    color:white;
+    width: 350px;
+    height: 425px;
+    padding: 10px 40px;
+
+    background-color:#8b9cad ;
+
+    border: 1px solid #999999;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+#n2{
+    font-family: MiNuevaFuente;
+    padding: 2px;
+    font-size: 35px;
+    text-align: center;
+    padding-left: 20px;
+    }
+input{
+    font-family: MiNuevaFuente;
+    font-size: 20px;
+    width: 100%;
+    margin-top: 40px;
+    padding: 7px;
+}
+#boton1{
+    background-color: rgb(49, 56, 73);
+    color:white;
+    font-family: MiNuevaFuente;
+    padding: 20px;
+    -moz-transition: all 1s ease;
+    -webkit-transition: all 1s ease;
+
+    border: none;
+}
+#boton2{
+    background-color: rgb(49, 56, 73);
+    color:white;
+    font-family: MiNuevaFuente;
+    -moz-transition: all 1s ease;
+    -webkit-transition: all 1s ease;
+ 	margin-top:5px;
+    border: none;
+}
+
+#boton1:hover{
+
+    cursor: pointer;
+    background: rgb(35, 37, 41);
+}
+
+#boton2:hover{
+
+    cursor: pointer;
+    background: rgb(35, 37, 41);
+}
+#img1{
+    margin: auto;
+    width: 30px;
+    opacity: 0.75;
+}
+#pie {
+font-family: MiNuevaFuente;
+margin-top: 10px;
+clear: both;
+text-align: center;
+color: white;
+padding: 20px;
+border-top: 2px solid #999999;
+}
 
 
 #formularioc {
@@ -231,4 +314,14 @@ label {
 	color: black;
 	font-size: 16px;
 	font-family: 'MiNuevaFuente';
+}
+
+#inicioSesion {
+	text-align: left;
+    margin: 0;
+    padding:0;
+    background-image: url('../files/img_background.jpg');
+    background-repeat: no-repeat;
+    background-size: 100vw 100vh;
+    background-attachment: fixed;
 }
