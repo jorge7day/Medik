@@ -25,7 +25,7 @@
 			</nav>
 
 			<div id="parrafo">
-				<p> Si usted está afiliado a seguros Medik cree aqui su cita.</p>
+				<p>Bienvenido</p>
 			</div>
 
 			<div id="buttons">

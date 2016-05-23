@@ -1,0 +1,234 @@
+body {
+
+	background-image: url("../files/img_heart_rate.svg");
+	background-attachment: fixed;
+
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	background-position: center;
+
+	text-align: left;
+
+	margin: 0;
+	padding:0;
+}
+
+
+
+@media screen and (max-width: 480px) {
+	#titulo {
+	font-size: 50px;
+	}
+
+	#parrafo {
+		font-size: 22px;
+	}
+}
+
+@font-face {
+	font-family: 'MiNuevaFuente';
+	src: url('../fonts/segoeuil_0.ttf');
+}
+
+#principal {
+	display: block;
+	background: #2c3e50;
+
+	text-align: left;
+
+	width: 100%;
+	margin: auto;
+	padding-top: 1%;
+
+	height: 30%;
+	max-height: 150px;
+}
+
+#logo {
+	margin: auto;
+
+	width: 10%;
+	max-width: 85px;
+
+	padding-left: 2.5%;
+
+	opacity: 0.75;
+}
+
+#titulo {
+	color: white;
+	font-size: 100px;
+	font-family: MiNuevaFuente;
+}
+
+
+
+#formularioc {
+	position:relative;
+	width: 60%;
+
+
+	color:white;
+
+	padding: 50px 50px; /*Margen interno*/
+
+	left: 60%;
+	top: 60%;
+	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+
+
+}
+
+
+input{
+margin-bottom: 10px;
+width: 200%
+padding:20PX;
+
+
+}
+#parrafo {
+	color:black;
+	display: block;
+	text-align: center;
+	margin: 20px auto;
+	font-family:MiNuevaFuente;
+	font-size: 45px;
+	width: auto;
+}
+
+@media screen and (max-width: 480px) {
+	#titulo {
+	font-size: 50px;
+	}
+
+	#parrafo {
+		font-size: 22px;
+	}
+}
+
+
+
+#registroseccion {
+	padding-top: 10px;
+	background-color: rgba(255, 255, 255, 0.9);
+	width:%;
+	margin: 0 auto;
+	font-family: MONOSPACE;
+}
+
+.registroseccion2 {
+/*	padding-top: 10px;*/
+	background-color: rgba(255, 255, 255, 0.9);
+	width:60%;
+	margin: auto;
+	font-family: MONOSPACE;
+}
+
+
+
+footer {
+
+	margin-top: 10px;
+	clear: both;
+	text-align: center;
+	padding: 20px;
+	border-top: 2px solid #999999;
+}
+
+
+
+
+
+
+nav {
+width: 100%;
+	display: block;
+	margin: 0 auto 20px;
+	border-top: 1px solid #333;
+	position: absolute;
+	background-color: #2c3e50;
+}
+
+nav ul{
+    list-style:none;
+    margin:0 10px 0 10px;
+    padding:0;
+	background-color: #2c3e50;
+}
+
+nav ul li{
+	font-family: Arial;
+    float:left;
+    font-size:16px;
+    margin-right:10px;
+    text-align:center;
+    /*Sombras para texto, los mismos parametros que box-shadow*/
+}
+
+nav ul li:hover{
+    background-color: #4c6e80;
+}
+
+nav ul li a{
+    color:#fff;
+    display:block;
+    padding:10px;
+    text-decoration:none;
+    /*Transiciones*/
+}
+
+nav ul #last_li {
+	float: right;
+}
+
+
+#buttons {
+	display: flex;
+}
+
+.button {
+	display: inline-block;
+	position: relative;
+	min-width: 175px;
+	min-height: 250px;
+
+/*
+	width: px;
+	height: 200px;
+
+*/
+
+	background-color: #2c3e50;
+	transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	-webkit-transition: all 1s ease;
+}
+
+.button:hover {
+	cursor: pointer;
+	width: 300px;
+	height:325px;
+
+	background-color: #54aae2;
+	transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	-webkit-transition: all 1s ease;
+}
+
+.boton:active {
+	box-shadow: #000000;
+}
+
+
+th {
+	padding: 10px;
+}
+
+
+label {
+	color: black;
+	font-size: 16px;
+	font-family: 'MiNuevaFuente';
+}

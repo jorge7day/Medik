@@ -36,9 +36,9 @@
 			</div>
 
 			<form action="" id="formularioc">
-				<input type="text" name="Nombre" placeholder="Nombre" required>
-				<input type="number" name="edad" min="0" max="120" placeholder="Edad" required>
-				<input type="text" name="ID" placeholder="Id de seguro" required>
+<!--				<input type="text" name="Nombre" placeholder="Nombre" required>-->
+<!--				<input type="number" name="edad" min="0" max="120" placeholder="Edad" required>-->
+				<input type="textarea" name="motivo" placeholder="Motivo" required>
 
 				<div style="">
 					<input type="submit" id="enviar_btn">

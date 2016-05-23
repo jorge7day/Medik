@@ -41,6 +41,9 @@
 				<p><b class="label">Hora de cita:</b> 12:00 AM<p>
 
 				<textarea placeholder="Agregar Diagnostico"></textarea>
+                <textarea placeholder="Medicamento"></textarea>
+
+				<input type="text" name="Dosis" placeholder="Dosis" size="75"required>
 
 				<div style="">
 					<input type="submit" id="enviar_btn">
