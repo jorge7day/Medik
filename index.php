@@ -11,14 +11,7 @@
 			<img src="files/icon_microscope.svg" id="logo">
 			<span id="titulo">Medik</span>
 		</header>
-		<nav>
-		<ul>
-			<li><a title="Opcion 1" href="mis_citas.php">Mis Citas</a></li>
-			<li><a title="Opcion 2" href="gestionar_cita.php">Gestionar Citas</a></li>
-			<li><a title="Opcion 2" href="pacientes.php">Pacientes</a></li>
-			<li id="last_li"><a title="Opcion 2" href="#">Usuario</a></li>
-		</ul>
-		</nav>
+
 	</section>
 
 	<section id="secf">
@@ -30,7 +23,8 @@
 			<input type="text" name="Id" placeholder="Usuario" required>
 			<input type="password" name="pasword" placeholder="Pasword" required>
 			<input type="submit" value="Ingresar"id="boton1">
-			<input type="submit"id="boton2" value="Registrarse">
+<!--			<input type="submit"id="boton2" value="Registrarse">-->
+			<a href="views/registro_paciente.php" class="link">Registrarse</a>
 		</form>
     </section>
 

@@ -95,7 +95,7 @@ body {
 input{
     font-family: MiNuevaFuente;
     font-size: 20px;
-    width: 100%;
+/*    width: 100%;*/ /*Con esto comentado, los labels aparecen en línea con los imputs*/
     margin-top: 40px;
     padding: 7px;
 }
@@ -165,9 +165,11 @@ border-top: 2px solid #999999;
 
 
 input{
+/*
 margin-bottom: 10px;
 width: 200%
 padding:20PX;
+*/
 
 
 }
@@ -324,4 +326,28 @@ label {
     background-repeat: no-repeat;
     background-size: 100vw 100vh;
     background-attachment: fixed;
+}
+
+.link {
+	text-align: center;
+	margin: auto;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	display: block;
+}
+
+.link:link {
+	color: white;
+}
+
+.link:hover {
+	color: cornflowerblue;
+}
+
+.link:visited {
+	color: #26266a;
+}
+
+.link:active {
+	color: #2c3e50;
 }
