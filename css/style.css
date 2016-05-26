@@ -75,7 +75,7 @@ body {
 #formulario{
     color:white;
     width: 350px;
-    height: 425px;
+    height: 400px;
     padding: 10px 40px;
 
     background-color:#8b9cad ;
@@ -198,7 +198,7 @@ padding:20PX;
 #registroseccion {
 	padding-top: 10px;
 	background-color: rgba(255, 255, 255, 0.9);
-	width:%;
+	/*width:%*/
 	margin: 0 auto;
 	font-family: MONOSPACE;
 }
@@ -341,7 +341,7 @@ label {
 }
 
 .link:hover {
-	color: cornflowerblue;
+	color: rgba(0,0,0,0.70);
 }
 
 .link:visited {

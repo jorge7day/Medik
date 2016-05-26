@@ -1,36 +1,80 @@
 <!DOCTYPE html>
+<?php
+    error_reporting(E_ERROR | E_PARSE);
+
+    include "/php/seq.php";
+?>
+
 <html lang="es">
-<head>
-<title>Login</title>
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-	<div id="inicioSesion">
-		<section>
-		<header id="principal">
-			<img src="files/icon_microscope.svg" id="logo">
-			<span id="titulo">Medik</span>
-		</header>
+	<head>
+		<meta charset="UTF-8">
+		<title>Medik</title>
 
-	</section>
+		<link rel="stylesheet" href="css/paciente_style.css">
+		<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+		<script type="text/javascript" src="js/crearCita_controller.js"></script>
+	</head>
 
-	<section id="secf">
-		<form action="" id="formulario">
-			<img src="files/open-lock-1.png" id="img1">
+	<body>
+		<section id="inicio">
+			<header id="principal">
+				<img src="files/icon_microscope.svg" id="logo">
+				<span id="titulo">Medik</span>
+			</header>
+			<nav>
+			<ul>
+				<li><a title="Opcion 1" href="mis_citas.php">Mis Citas</a></li>
+				<li><a title="Opcion 2" href="gestor_citas.php">Gestionar Citas</a></li>
+				<li><a title="Opcion 2" href="pacientes.php">Pacientes</a></li>
+				
+                                <li id="last_li">
+                                    <a title="Opcion 2" href="php/logout.php">
+                                        <?php
+                                        session_start();
+                                        echo strtoupper($_SESSION["usuario"]);
+                                        ?>
+                                    </a>
+                                </li>
+			</ul>
+			</nav>
 
-			<span id="n2">Iniciar Sesion</span>
+			<div id="parrafo">
+				<p>Bienvenido</p>
+			</div>
 
-			<input type="text" name="Id" placeholder="Usuario" required>
-			<input type="password" name="pasword" placeholder="Pasword" required>
-			<input type="submit" value="Ingresar"id="boton1">
-<!--			<input type="submit"id="boton2" value="Registrarse">-->
-			<a href="views/registro_paciente.php" class="link">Registrarse</a>
-		</form>
-    </section>
+			<div id="buttons">
+				<div class="button" id="crearCita_btn" onclick="mostrarFormulario()">
+					<img src="files/icon_crear_citas.svg" id="img">
+					<p id="nombre">Crear cita</p>
+				</div>
 
-<footer id="pie">
-         Derechos Reservados &copy; 2016-2020
-        </footer>
-	</div>
-</body>
+				<!--<a href="consultar.php">-->
+				<div class="button" id="consultarCitas_btn" onclick="location.href='mis_citas.php'">
+					<img src="files/icon_ver_citas.svg" id="verCitas_img">
+					<p id="consultarCitas_texto">Consultar citas</p>
+				</div>
+				<!--</a>-->
+			</div>
+		</section>
+
+		<section id="form" style="display:none">
+			<form action="" id="formulario">
+
+				<p id="n2"> Crea tu cita</p>
+				<input type="text" name="Nombre" placeholder="Nombre" required>
+				<input type="number" name="edad" min="0" max="120" placeholder="Edad" required>
+				<input type="text" name="ID" placeholder="Id de seguro" required>
+
+				<div style="">
+					<input type="submit" id="enviar_btn">
+					<input type="button" id="cancelar_btn" onclick="mostrarFormulario()" value="Cancelar">
+				</div>
+			</form>
+
+		</section>
+
+		<footer style="display:none">
+			Derechos Reservados &copy; 2016-2020
+		</footer>
+	</body>
 </html>
