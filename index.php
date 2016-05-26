@@ -2,79 +2,78 @@
 <?php
     error_reporting(E_ERROR | E_PARSE);
 
-    include "/php/seq.php";
+    include "./php/seq.php";
 ?>
 
 <html lang="es">
-	<head>
-		<meta charset="UTF-8">
-		<title>Medik</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>Medik</title>
+        
+        <link rel="stylesheet" href="css/paciente_style.css">
+        <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+        <script type="text/javascript" src="js/crearCita_controller.js"></script>
+    </head>
+    
+    <body>
+        <section id="inicio">
+            <?php
+            include 'views/templates/header.php';
+            ?>
 
-		<link rel="stylesheet" href="css/paciente_style.css">
-		<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
-		<script type="text/javascript" src="js/crearCita_controller.js"></script>
-	</head>
+            <?php
+                error_reporting(E_ERROR | E_PARSE);
 
-	<body>
-		<section id="inicio">
-			<header id="principal">
-				<img src="files/icon_microscope.svg" id="logo">
-				<span id="titulo">Medik</span>
-			</header>
-			<nav>
-			<ul>
-				<li><a title="Opcion 1" href="mis_citas.php">Mis Citas</a></li>
-				<li><a title="Opcion 2" href="gestor_citas.php">Gestionar Citas</a></li>
-				<li><a title="Opcion 2" href="pacientes.php">Pacientes</a></li>
-				
-                                <li id="last_li">
-                                    <a title="Opcion 2" href="php/logout.php">
-                                        <?php
-                                        session_start();
-                                        echo strtoupper($_SESSION["usuario"]);
-                                        ?>
-                                    </a>
-                                </li>
-			</ul>
-			</nav>
+                session_start();
 
-			<div id="parrafo">
-				<p>Bienvenido</p>
-			</div>
+                include 'php/Credenciales.php';
 
-			<div id="buttons">
-				<div class="button" id="crearCita_btn" onclick="mostrarFormulario()">
-					<img src="files/icon_crear_citas.svg" id="img">
-					<p id="nombre">Crear cita</p>
-				</div>
+                if($_SESSION["tipo"] == Credenciales::TIPO_MEDICO) {
+                    include 'views/templates/menu_medico.php';
+                }
+                else {
+                    include 'views/templates/menu_paciente.php';
+                }
+            ?>
+            
+            <div id="parrafo">
+                <p>Bienvenido</p>
+            </div>
+            
+            <?php 
+            error_reporting(E_ERROR | E_PARSE);
 
-				<!--<a href="consultar.php">-->
-				<div class="button" id="consultarCitas_btn" onclick="location.href='mis_citas.php'">
-					<img src="files/icon_ver_citas.svg" id="verCitas_img">
-					<p id="consultarCitas_texto">Consultar citas</p>
-				</div>
-				<!--</a>-->
-			</div>
-		</section>
+                session_start();
 
-		<section id="form" style="display:none">
-			<form action="" id="formulario">
+                include '/medik/php/Credenciales.php';
 
-				<p id="n2"> Crea tu cita</p>
-				<input type="text" name="Nombre" placeholder="Nombre" required>
-				<input type="number" name="edad" min="0" max="120" placeholder="Edad" required>
-				<input type="text" name="ID" placeholder="Id de seguro" required>
-
-				<div style="">
-					<input type="submit" id="enviar_btn">
-					<input type="button" id="cancelar_btn" onclick="mostrarFormulario()" value="Cancelar">
-				</div>
-			</form>
-
-		</section>
-
-		<footer style="display:none">
-			Derechos Reservados &copy; 2016-2020
-		</footer>
-	</body>
+                if($_SESSION["tipo"] == Credenciales::TIPO_PACIENTE) {
+                    include 'views/templates/index_contenido_paciente.php';
+                }
+                else {
+                    //
+                }
+            ?>
+        </section>
+        
+        <section id="form" style="display:none">
+            <form action="" id="formulario">
+                
+                <p id="n2"> Crea tu cita</p>
+                <input type="text" name="Nombre" placeholder="Nombre" required>
+                <input type="number" name="edad" min="0" max="120" placeholder="Edad" required>
+                <input type="text" name="ID" placeholder="Id de seguro" required>
+                
+                <div style="">
+                    <input type="submit" id="enviar_btn">
+                    <input type="button" id="cancelar_btn" onclick="mostrarFormulario()" value="Cancelar">
+                </div>
+            </form>
+            
+        </section>
+        
+        <footer style="display:none">
+            Derechos Reservados &copy; 2016-2020
+        </footer>
+    </body>
 </html>
