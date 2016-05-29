@@ -41,8 +41,12 @@
                 <p>Pacientes</p>
             </div>
             
-            
-            <table id="citastable" border="1" style="width:100%">
+            <?php
+                //set_include_path("C:\\xampp\\htdocs\\medik\\views\\templates");
+                include 'templates/index_contenido_medico.php';
+                
+            ?>
+<!--            <table id="citastable" border="1" style="width:100%">
                 <tr id="tr_tags">
                     <th id="first-child">Nombre Paciente</th>
                     <th>Sexo</th>
@@ -50,7 +54,7 @@
                     <th>Teléfono</th>
                     <th>Programar Cita</th>
                 </tr>
-                <!--INFORMACION DE LOS PACIENTES-->
+                INFORMACION DE LOS PACIENTES
                 <tr>
                     <td><a class="trcita" href="#">Eve asdf asdf</a></td>
                     <td>Femenino</td>
@@ -59,7 +63,7 @@
                     <td><button onclick="crearCita('idpaciente')" class="btn_con_img"><img id="img_btn" src="../files/add_icon.png"></button></td>
                 </tr>
                 
-            </table>
+            </table>-->
             
         </section>
         
