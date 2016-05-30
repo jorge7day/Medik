@@ -27,7 +27,7 @@
             
             include '../php/credenciales.php';
             
-            if($_SESSION["tipo"] == Credenciales::TIPO_MEDICO) {
+            if($_SESSION["tipo"] == \clases\Credenciales::TIPO_MEDICO) {
                 include 'templates/menu_medico.php';
             }
             else {
@@ -48,51 +48,9 @@
             </section>
             
             
-            <table id="citastable" border="1" style="width:100%">
-                <tr id="tr_tags">
-                    <th id="first-child">Nombre Paciente</th>
-                    <th>Fecha</th>
-                    <th id="last-child">Hora</th>
-                    <th>Diagnostico</th>
-                </tr>
-                <tr>
-                    <td><a class="trcita" href="cita.php?idcita=234">Eve asdf asdf</a></td>
-                    <td>94-45-1234</td>
-                    <td>12:30 AM</td>
-                    <td>Jackson asdf asd asd</td>
-                </tr>
-                <tr>
-                    <td><a class="trcita" href="cita.php?idcita=234">Eve asdf asdf</a></td>
-                    <td>94-45-1234</td>
-                    <td>12:30 AM</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><a class="trcita" href="cita.php?idcita=234">Eve asdf asdf</a></td>
-                    <td>94-45-1234</td>
-                    <td>12:30 AM</td>
-                    <td>Jackson asdf asd asd</td>
-                </tr>
-                <tr>
-                    <td><a class="trcita" href="cita.php?idcita=234">Eve asdf asdf</a></td>
-                    <td>94-45-1234</td>
-                    <td>12:30 AM</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td><a class="trcita" href="cita.php?idcita=234">Eve asdf asdf</a></td>
-                    <td>94-45-1234</td>
-                    <td>12:30 AM</td>
-                    <td>Jackson asdf asd asd</td>
-                </tr>
-                <tr>
-                    <td><a class="trcita" href="cita.php?idcita=234">Eve asdf asdf</a></td>
-                    <td>94-45-1234</td>
-                    <td>12:30 AM</td>
-                    <td>-</td>
-                </tr>
-                
-            </table>
+            <?php
+            include 'templates/mis_citas_contenido_paciente.php';
+            ?>
             
         </section>
         

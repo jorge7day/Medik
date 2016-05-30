@@ -1,10 +1,30 @@
-<!DOCTYPE html>
 <?php
+namespace views;
+use clases\Credenciales;
+
+session_start();
+
     error_reporting(E_ERROR | E_PARSE);
     
     set_include_path("C:\\xampp\\htdocs\\medik\\php");
     include 'seq.php';
+
+
+    //Verificando si el usuario ha intentado crear la cita ya
+    if(isset($_POST["motivo"])) {
+        include 'cita.php';
+
+        $cita = new \clases\Cita($_SESSION["codigo"], $_POST["motivo"]);
+
+        $cita->saveOnDB();
+
+        header("location: mis_citas.php");
+    }
+    else {
+        //echo "El motivo ESTÁ vacío";
+    }
 ?>
+<!DOCTYPE html>
 <html lang="es">
     <head>
         <meta charset="UTF-8">
@@ -41,14 +61,14 @@
                 <p>Crear Cita</p>
             </div>
             
-            <form action="" id="formularioc">
+            <form action="new_cita.php" id="formularioc" method="post">
 <!--				<input type="text" name="Nombre" placeholder="Nombre" required>-->
 <!--				<input type="number" name="edad" min="0" max="120" placeholder="Edad" required>-->
                 <input type="textarea" name="motivo" placeholder="Motivo" required>
                 
                 <div style="">
                     <input type="submit" id="enviar_btn">
-                    <input type="button" id="cancelar_btn" onclick="mostrarFormulario()" value="Cancelar">
+                    <input type="button" id="cancelar_btn" onclick="javascript:window.history.go(-1)" value="Cancelar">
                 </div>
             </form>
             

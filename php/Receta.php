@@ -1,5 +1,7 @@
 <?php
-include 'database.php';
+namespace clases;
+use clases\Database;
+//include 'database.php';
 /**
  * Description of Receta
  *

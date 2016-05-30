@@ -1,4 +1,7 @@
 <?php
+namespace procesos;
+set_include_path("C:\\xampp\\htdocs\\medik\\php");
+
 // Notificar solamente errores de ejecución
 error_reporting(E_ERROR | E_PARSE);
 
@@ -12,7 +15,7 @@ if(isset($_POST["nombre_usuario"]) && isset($_POST["contraseña"])) {
     include 'credenciales.php';
 
     //Creamos una instancia de la tabla credenciales
-    $credenciales = new Credenciales($usuario, $contraseña);
+    $credenciales = new \clases\Credenciales($usuario, $contraseña);
 
     //Hacemos la autenticación pertinente, y si no se pudo identificar, redirecciona al login
     if($credenciales->autentiq($usuario, $contraseña) == false) {

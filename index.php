@@ -25,10 +25,11 @@
                 error_reporting(E_ERROR | E_PARSE);
 
                 session_start();
+                set_include_path("C:\\xampp\\htdocs\\medik\\php");
 
-                include 'php/Credenciales.php';
+                include 'Credenciales.php';
 
-                if($_SESSION["tipo"] == Credenciales::TIPO_MEDICO) {
+                if($_SESSION["tipo"] == \clases\Credenciales::TIPO_MEDICO) {
                     include 'views/templates/menu_medico.php';
                 }
                 else {
@@ -47,7 +48,7 @@
 
                 include '/medik/php/Credenciales.php';
 
-                if($_SESSION["tipo"] == Credenciales::TIPO_PACIENTE) {
+                if($_SESSION["tipo"] == \clases\Credenciales::TIPO_PACIENTE) {
                     include 'views/templates/index_contenido_paciente.php';
                 }
                 else {
