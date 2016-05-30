@@ -1,10 +1,12 @@
-<!DOCTYPE html>
 <?php
-    error_reporting(E_ERROR | E_PARSE);
-    
-    set_include_path("C:\\xampp\\htdocs\\medik\\php");
-    include 'seq.php';
+namespace views;
+
+error_reporting(E_ERROR | E_PARSE);
+
+set_include_path("C:\\xampp\\htdocs\\medik\\php");
+include 'seq.php';
 ?>
+<!DOCTYPE html>
 <html lang="es">
     <head>
         <meta charset="UTF-8">
@@ -23,10 +25,12 @@
             
             <?php
             session_start();
+            //use clases\Credenciales;
+            set_include_path("C:\\xampp\\htdocs\\medik\\php");
+
+            include 'credenciales.php';
             
-            include '../php/credenciales.php';
-            
-            if($_SESSION["tipo"] == Credenciales::TIPO_MEDICO) {
+            if($_SESSION["tipo"] == \clases\Credenciales::TIPO_MEDICO) {
                 include 'templates/menu_medico.php';
             }
             else {

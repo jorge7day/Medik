@@ -1,9 +1,13 @@
 <?php
-
+namespace templates;
 
 set_include_path("C:\\xampp\\htdocs\\medik\\php");
+use clases\Database;
+use clases\Paciente;
+
 
 include 'Paciente.php';
+//include 'Database.php';
     
 //Instanciando la base de datos
 $database = new Database();

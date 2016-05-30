@@ -1,11 +1,13 @@
-<!DOCTYPE html>
 <?php
-    error_reporting(E_ERROR | E_PARSE);
+namespace views;
+
+error_reporting(E_ERROR | E_PARSE);
     
-    set_include_path("C:\\xampp\\htdocs\\medik\\php");
-    include 'seq.php';
+set_include_path("C:\\xampp\\htdocs\\medik\\php");
+include 'seq.php';
 ?>
 
+<!DOCTYPE html>
 <html lang="es">
     <head>
         <meta charset="UTF-8">
