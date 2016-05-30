@@ -58,7 +58,7 @@ if(isset($_POST["nombre"])) {
         $credenciales->codigo_usuario = $temp->codigo_paciente;
         
         //Guardando credenciales
-        $credenciales->saveOnDB();
+        echo $credenciales->saveOnDB();
     }
 }
 ?>

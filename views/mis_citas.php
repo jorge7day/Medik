@@ -1,14 +1,11 @@
-<?php
-namespace views;
-//use clases\Cita;
 
-error_reporting(E_ERROR | E_PARSE);
+<!DOCTYPE html>
+<?php
+    error_reporting(E_ERROR | E_PARSE);
     
     set_include_path("C:\\xampp\\htdocs\\medik\\php");
     include 'seq.php';
 ?>
-
-<!DOCTYPE html>
 <html lang="es">
     <head>
         <meta charset="UTF-8">
@@ -30,7 +27,7 @@ error_reporting(E_ERROR | E_PARSE);
             
             include '../php/credenciales.php';
             
-            if($_SESSION["tipo"] == \clases\Credenciales::TIPO_MEDICO) {
+            if($_SESSION["tipo"] == Credenciales::TIPO_MEDICO) {
                 include 'templates/menu_medico.php';
             }
             else {
@@ -50,10 +47,52 @@ error_reporting(E_ERROR | E_PARSE);
                 <a id="btn_cnc" class="btn_azul" href="new_cita.php">Nueva Cita</a>
             </section>
             
-            <?php
-                include 'templates/mis_citas_contenido_paciente.php';
-            ?>
             
+            <table id="citastable" border="1" style="width:100%">
+                <tr id="tr_tags">
+                    <th id="first-child">Nombre Paciente</th>
+                    <th>Fecha</th>
+                    <th id="last-child">Hora</th>
+                    <th>Diagnostico</th>
+                </tr>
+                <tr>
+                    <td><a class="trcita" href="cita.php?idcita=234">Eve asdf asdf</a></td>
+                    <td>94-45-1234</td>
+                    <td>12:30 AM</td>
+                    <td>Jackson asdf asd asd</td>
+                </tr>
+                <tr>
+                    <td><a class="trcita" href="cita.php?idcita=234">Eve asdf asdf</a></td>
+                    <td>94-45-1234</td>
+                    <td>12:30 AM</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><a class="trcita" href="cita.php?idcita=234">Eve asdf asdf</a></td>
+                    <td>94-45-1234</td>
+                    <td>12:30 AM</td>
+                    <td>Jackson asdf asd asd</td>
+                </tr>
+                <tr>
+                    <td><a class="trcita" href="cita.php?idcita=234">Eve asdf asdf</a></td>
+                    <td>94-45-1234</td>
+                    <td>12:30 AM</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><a class="trcita" href="cita.php?idcita=234">Eve asdf asdf</a></td>
+                    <td>94-45-1234</td>
+                    <td>12:30 AM</td>
+                    <td>Jackson asdf asd asd</td>
+                </tr>
+                <tr>
+                    <td><a class="trcita" href="cita.php?idcita=234">Eve asdf asdf</a></td>
+                    <td>94-45-1234</td>
+                    <td>12:30 AM</td>
+                    <td>-</td>
+                </tr>
+                
+            </table>
             
         </section>
         

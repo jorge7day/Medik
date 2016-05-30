@@ -1,9 +1,4 @@
 <?php
-namespace operaciones;
-use clases\Credenciales;
-
-include 'credenciales.php';
-
 // Notificar solamente errores de ejecución
 error_reporting(E_ERROR | E_PARSE);
 
@@ -14,10 +9,10 @@ if(isset($_POST["nombre_usuario"]) && isset($_POST["contraseña"])) {
     $contraseña = hash("sha256", $_POST["contraseña"]);
 
     //Hacemos la inclusión de los algoritmos alojados en "credenciales.php"
-    //include 'credenciales.php';
+    include 'credenciales.php';
 
     //Creamos una instancia de la tabla credenciales
-    $credenciales = new \clases\Credenciales($usuario, $contraseña);
+    $credenciales = new Credenciales($usuario, $contraseña);
 
     //Hacemos la autenticación pertinente, y si no se pudo identificar, redirecciona al login
     if($credenciales->autentiq($usuario, $contraseña) == false) {
@@ -48,9 +43,11 @@ function initSession($usuario, $tipo, $codigo_usuario) {
         $_SESSION["tipo"] = $tipo;
         $_SESSION["codigo"] = $codigo_usuario;
             
+        echo '<br> Sesión iniciada<br>';
+            
     }
     else {
-        //echo '<br> Sesión existente<br>';
+        echo '<br> Sesión existente<br>';
     }
 }
 require './login-view.php';

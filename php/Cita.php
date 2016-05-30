@@ -42,6 +42,13 @@ class Cita {
     private $activo = self::COL_ACTIVO;
     private $visible = self::VISIBLE;
     
+    //
+    private $intervalo_cita;
+    private $entrada_mañana;
+    private $salida_mañana;
+    private $entrada_tarde;
+    private $salida_tarde;
+    
     /**
      * Para construir una cita, se necesita del código del médico, del código del paciente y del motivo de su cita
      * @param type $codigo_medico
@@ -56,6 +63,12 @@ class Cita {
         
         $this->activo = self::ACTIVO;
         $this->visible = self::VISIBLE;
+        
+        $this->intervalo_cita = new \DateInterval("30 min");
+        $this->entrada_mañana = date_create("09:00:00");
+        $this->salida_mañana = date_create("12:00:00");
+        $this->entrada_tarde = date_create("13:00:00");
+        $this->salida_tarde = date_create("20:00:00");
     }
     
     function isActivo() {
@@ -118,64 +131,73 @@ class Cita {
     private function getNextTurno() {
         //include 'cita.php';
         $database = new Database();
-        //$fecha = null; //Variable que almacenará la fecha y hora de la cita
-        //$f_base = null;
-                
-        //Construyendo sentencia para obtener el último turno del siguiente día
-        $sentencia = "select max(" . self::COL_F_CITA . ") from " . Database::TABLA_CITA;
-
-        //Se ejecuta la sentencia que extrae el último turno
-        $res = $database->request($sentencia);
-
-        //Ahora que se han obtenido todas las citas para ese día, hay que ver cuál es el turno más tardío
-        if($res == null) {
-            return null;
-        }
-
-        $row = mysqli_fetch_assoc($res);
+        $fecha = null; //Variable que almacenará la fecha y hora de la cita
+        $f_base = null;
         
-        $fecha = date_create_from_format("Y-m-d H:i:s", $row["max(" . self::COL_F_CITA . ")"]);
-        //////////////////////////////////////////
-
-        date_modify($fecha, "+30 min");
-        
-        ////////////////////////
-        $almuerzo = date_create(date_format($fecha, "Y-m-d H:i:s"));
-        $entrada_tarde = date_create(date_format($fecha, "Y-m-d H:i:s"));
-        
-        date_modify($almuerzo, "noon");
-        date_modify($entrada_tarde, "noon + 1 hour");
-        /////////////////////////
-        $diff1 = date_diff($almuerzo, $fecha);
-        $diff2 = date_diff($entrada_tarde, $fecha);
-        //$diff2 = date_diff($fecha, $entrada_tarde);
-        
-        $dr1 = doubleval($diff1->format("%r%h.%i"));
-        $dr2 = doubleval($diff2->format("%r%h.%i"));
-        
-        while($dr1 >= 0 && $dr2 < 0) {
-            date_modify($fecha, "+30 min");
+        do {
+            //Bandera que refleja si la hora y fecha están en el rango de trabajo del médico
+            $isReady = true;
             
-//            $diff1 = date_diff($fecha, $almuerzo);
-//            $diff2 = date_diff($fecha, $entrada_tarde);
-            $diff1 = date_diff($almuerzo, $fecha);
-            $diff2 = date_diff($entrada_tarde, $fecha);
+            //Obteniendo el objeto fecha del siguiente día
+            $f_base = date_create();
+            $f_base->add(\DateInterval::createFromDateString("1 day"));
             
-            $dr1 = doubleval($diff1->format("%r%h.%i"));
-            $dr2 = doubleval($diff2->format("%r%h.%i"));
-        }
-        
-        ///////////////////////////////////////////////
-        $salida = date_create(date_format($fecha, "Y-m-d H:i:s"));
-        date_modify($salida, "noon + 6 hours");
-        
-        $diff3 = date_diff($fecha, $salida);
-        
-        if(doubleval($diff3->format("%r%h.%i")) < 0.3) {
-            date_modify($fecha, "+1 day");
+            //GUardando el String de la fecha
+            $temp = date_format($f_base, "Y-m-d");
             
-            date_time_set($fecha, 9, 0, 0);
-        }
+            //Construyendo sentencia para obtener el último turno del siguiente día
+            $sentencia = "select max(" . self::COL_F_CITA . ") from " . Database::TABLA_CITA 
+                    . " where " . self::COL_F_CITA 
+                    . " between '" . $temp . " " . self::entrada_mañana
+                    . "' and '" . $temp . " " . self::salida_tarde . "'";
+
+            //Se ejecuta la sentencia que extrae el último turno
+            $res = $database->request($sentencia);
+            
+            //Ahora que se han obtenido todas las citas para ese día, hay que ver cuál es el turno más tardío
+            if($res == null) {
+                return null;
+            }
+            
+            $row = mysqli_fetch_assoc($res);
+
+            //$last_date = date_create_from_format("Y-m-d H:i:s", $row["max(" . self::COL_F_CITA . ")"]);
+
+            //Buscando la posible hora y fecha de la nueva cita
+            if($fecha == null) {
+                $fecha = date_create_from_format("Y-m-d H:i:s", $row["max(" . self::COL_F_CITA . ")"]);
+            }
+            
+            //Se le suman 30 minutos a la hora, para mover la cita
+            //media hora más tarde
+            $fecha->add(\DateInterval::createFromDateString("30 minute"));
+
+            //Creando horarios de corte del servicio
+            //$entrada_mañana = date_create($temp . " " . self::entrada_mañana);
+            $salida_mañana = date_create($temp . " " . self::salida_mañana);
+            $entrada_tarde = date_create($temp . " " . self::entrada_tarde);
+            $salida_tarde = date_create($temp . " " . self::salida_tarde);
+
+            //Haciendo las pruebas pertinentes:
+            //Si la posible cita es más tarde que las 12:00 y más temprano 
+            //que la 1:00, entonces queda en el almuerzo y no puede ser
+            while($fecha >= $salida_mañana && $fecha < $entrada_tarde) {
+                //QUEDA EN EL ALMUERZO
+                //$isReady = false;
+                $fecha->add(\DateInterval::createFromDateString("30 minute"));
+            }
+
+            //Probando si QUEDA PARA MAÑANA
+            if($fecha >= $salida_tarde) {
+                //Ya no es hora de atender
+                $isReady = false;
+
+                //Avanza un día en la fecha
+                $f_base = date_create(date_format($f_base, ""), $object)
+                $f_base->add(\DateInterval::createFromDateString("1 day"));
+            }
+            
+        } while($isReady == false);
         
         return $fecha;
     }
@@ -191,7 +213,7 @@ class Cita {
         $database = new Database();
         
         //Obteniendo siguiente turno libre
-        $this->f_cita = $this->getNextTurno();
+        $res = $this->getNextTurno();
         
         //Creando una bandera que indique si la receta está lista para ser
         //almacenada en la BD
@@ -216,10 +238,11 @@ class Cita {
         
         
         //Creando la sentencia para guardar la receta
-        $sentencia = "insert into " . Database::TABLA_CITA . " values (null, "
+        $sentencia = "insert into " . Database::TABLA_CITA
+                . " values (null, "
                 . $this->codigo_medico . ", "
                 . $this->codigo_paciente . ", '"
-                . date_format($this->f_cita, "Y-m-d H:i:s") . "', '"
+                . $this->f_cita . "', '"
                 . $this->motivo . "', '"
                 . $this->diagnostico . "', "
                 . $this->activo . ", "
@@ -229,26 +252,11 @@ class Cita {
         //echo $sentencia;
 
         //Si pasa las comprobaciones
-        if($isReady) {
+        if(false) {
             return $database->execute($sentencia);
         }
         else {
             return false;
         }
-    }
-    
-    /**
-     * Hace una búsqueda de la cita proporcionada en la base de datos 
-     * @param int $codigo_cita
-     * @return mixed Devuelve el resultado de la BD, si lo encuentra, sino, NULL
-     */
-    public static function find($codigo_cita) {
-        $database = new Database();
-        
-        //Creando sentencia de búsqueda
-        $sentencia = "select * from " . Database::TABLA_CITA
-                . " where " . self::COL_CODIGO_CITA . "=" . $codigo_cita;
-        
-        return $database->request($sentencia);
     }
 }

@@ -1,13 +1,10 @@
-<?php
-namespace views;
-
-error_reporting(E_ERROR | E_PARSE);
-
-set_include_path("C:\\xampp\\htdocs\\medik\\php");
-include 'seq.php';
-?>
-
 <!DOCTYPE html>
+<?php
+    error_reporting(E_ERROR | E_PARSE);
+    
+    set_include_path("C:\\xampp\\htdocs\\medik\\php");
+    include 'seq.php';
+?>
 <html lang="es">
     <head>
         <meta charset="UTF-8">
@@ -26,11 +23,10 @@ include 'seq.php';
             
             <?php
             session_start();
-            set_include_path("C:\\xampp\\htdocs\\medik\\php");
-
-            include 'Credenciales.php';
             
-            if($_SESSION["tipo"] == \clases\Credenciales::TIPO_MEDICO) {
+            include '../php/credenciales.php';
+            
+            if($_SESSION["tipo"] == Credenciales::TIPO_MEDICO) {
                 include 'templates/menu_medico.php';
             }
             else {
@@ -45,9 +41,32 @@ include 'seq.php';
                 <p>Gestor de citas</p>
             </div>
             
-            <?php 
-                        include 'templates/gestor_citas_contenido.php';
-            ?>
+            <table id="citastable" border="1" style="width:100%">
+                <tr id="tr_tags">
+                    <th id="first-child">Nombre Paciente</th>
+                    <th>Fecha</th>
+                    <th id="last-child">Hora</th>
+                    <th>Diagnostico</th>
+                    <th>Eliminar</th>
+                </tr>
+                <tr>
+                    <td>Eve asdf asdf</td>
+                    <td>94-45-1234</td>
+                    <td>12:30 AM</td>
+                    <td>Jackson asdf asd asd</td>
+                    <td><button onclick="eliminarCita(id)" class="btn_con_img"><img id="img_btn" src="../files/borrar_icon.png"></button></td>
+                </tr>
+                
+                
+                <tr>
+                    <td><a class="trcita" href="cita.php?idcita=234">Eve asdf asdf</a></td>
+                    <td>94-45-1234</td>
+                    <td>12:30 AM</td>
+                    <td><button onclick="agregarDiagnostico('idCita')" class="btn_con_img"><img id="img_btn" src="../files/add_icon.png"></button></td>
+                    <td><button onclick="eliminarCita(id)" class="btn_con_img"><img id="img_btn" src="../files/borrar_icon.png"></button></td>
+                </tr>
+                
+            </table>
             
         </section>
         

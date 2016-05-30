@@ -1,14 +1,10 @@
+<!DOCTYPE html>
 <?php
-namespace views;
-use operaciones;
-use clases\Credenciales as Credenciales;
-
-error_reporting(E_ERROR | E_PARSE);
+    error_reporting(E_ERROR | E_PARSE);
 
     include "./php/seq.php";
 ?>
 
-<!DOCTYPE html>
 <html lang="es">
     <head>
         <meta charset="UTF-8">

@@ -1,8 +1,5 @@
 <?php
-namespace clases;
-use clases\Database;
-
-//include 'database.php';
+include 'database.php';
 /**
  * Description of Receta
  *
@@ -28,16 +25,16 @@ class Receta {
 
     /**
      * Hace una búsqueda de la receta conociendo su código
-     * @param type $codigo_cita
+     * @param type $codigo_receta
      * @return mysqli_return Los resultados de la búsqueda o NULL si no encuentra nada
      */
-    public static function find($codigo_cita) {
+    public static function find($codigo_receta) {
         //Creando el objeto de control sobre la base de datos y accediendo a ella
         $database = new Database();
         
         //Creando la sentencia de búsqueda
         $sentencia = "select * from " . Database::TABLA_RECETA 
-                . " where " . self::COL_CODIGO_CITA . "=" . $codigo_cita;
+                . " where " . self::COL_CODIGO_RECETA . "=" . $codigo_receta;
         
         //Ejecutando la instrucción
         return $database->request($sentencia);

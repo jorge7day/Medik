@@ -1,5 +1,4 @@
 <?php
-namespace operaciones;
 
 //Reanudando la sesión
 @session_start();
