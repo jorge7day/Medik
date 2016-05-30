@@ -1,5 +1,8 @@
 <?php
-
+namespace clases;
+//use clases\Cita as Cita;
+//set_include_path("C:\\xampp\\htdocs\\medik\\php");
+//include 'cita.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,7 +13,7 @@
 error_reporting(E_ERROR | E_PARSE);
 
 /**
- * Description of database
+ * Description of Database
  *
  * @author Otoniel
  */
@@ -45,7 +48,7 @@ class Database {
             
             //Se configura el conjunto de caracteres que se utilizarán
             mysqli_set_charset($this->conexion, "utf8");
-            
+
             //Comprobamos que la conexión se haya realizado correctamente
             if (!$this->conexion) {
                 die("Error de conexión: " . mysqli_error($this->conexion));
@@ -59,14 +62,14 @@ class Database {
     }
     
     /**
-     * Ejecuta una consulta SQL en la base de datos 
+     * Ejecuta una consulta SQL en la base de datos
      * @param type $sentencia
-     * @return mixed DEVUELVE los resultados del QUERY o NULL
+     * @return mixed DEVUELVE los resultados del QUERY (por lo que hay que usar mysqli_fetch_assoc) o NULL
      */
-    public function request($sentencia) {        
+    public function request($sentencia) {
         //Se ejecuta la sentencia sql enviada y se guardan los resultados
         $result = mysqli_query($this->conexion, $sentencia);
-        
+
         //Si se ejecutó correctamente y hay por lo menos una fila de resultados
         if($result != false) {
             if($result->num_rows > 0) {
@@ -79,30 +82,30 @@ class Database {
         }
         return null;
     }
-    
+
     /**
-     * Ejecuta una sentencia DML (insert, update, delete) 
+     * Ejecuta una sentencia DML (insert, update, delete)
      * @param string $sentencia
      * @return boolean TRUE si se ejecutó correctamete, de lo contrario FALSE
      */
-    public function execute($sentencia) {            
+    public function execute($sentencia) {
         //Se ejecuta la sentencia SQL
         return mysqli_query($this->conexion, $sentencia);
     }
-    
+
     /**
      * Extrae los pacientes almacenados en la base de datos.
      * Para recorrerlo, puede extraerse uno por uno usando ejecutando
      * fetch_assoc() sobre el objeto
-     * @return mysqli_result 
+     * @return mysqli_result
      */
     public function getPacientes() {
         //Se prepara la sentencia SQL para extraer los pacientes
         $sentencia = "select * from " . self::TABLA_PACIENTE;
-        
+
         //Se ejecuta la sentencia sql enviada y se guardan los resultados
         $result = mysqli_query($this->conexion, $sentencia);
-        
+
         //Si se ejecutó correctamente y hay por lo menos una fila de resultados
         if($result->num_rows > 0) {
             //Se coloca el cursor de los resultados en el primer resultado
@@ -120,7 +123,7 @@ class Database {
      * Extrae los médicos almacenados en la base de datos.
      * Para recorrerlo, puede extraerse uno por uno usando ejecutando
      * fetch_assoc() sobre el objeto
-     * @return mysqli_result 
+     * @return mysqli_result
      */
     public function getMedicos() {
         //Se prepara la sentencia SQL para extraer los pacientes
@@ -141,42 +144,80 @@ class Database {
             return false;
         }
     }
+    
     /**
      * Extrae las citas almacenadas de un paciente en la base de datos.
      * Para recorrerlo, puede extraerse uno por uno usando ejecutando
      * fetch_assoc() sobre el objeto
-     * @return mysqli_result 
+     * @return mysqli_result
      */
     public function getCitas($codigo_paciente) {
+        //set_include_path("C:\\xampp\\htdocs\\medik\\php");
+        include 'Cita.php';
+
         //Se prepara la sentencia SQL para extraer los pacientes
-        $sentencia = "select * from " . self::TABLA_CITA 
+        $sentencia = "select * from " . self::TABLA_CITA
                 . " where " . Cita::COL_CODIGO_PACIENTE . "=" . $codigo_paciente;
-        
+
         //Se ejecuta la sentencia sql enviada y se guardan los resultados
         $result = mysqli_query($this->conexion, $sentencia);
 
         //Si se ejecutó correctamente y hay por lo menos una fila de resultados
-        if($result->num_rows > 0) {
-            //Se coloca el cursor de los resultados en el primer resultado
-            mysqli_data_seek($result, 0);
+        if($result != false) {
+            if($result->num_rows > 0) {
+                //Se coloca el cursor de los resultados en el primer resultado
+                mysqli_data_seek($result, 0);
 
-            //Se develven los resultados
-            return $result;
+                //Se develven los resultados
+                return $result;
+            }
         }
-        else {
-            return false;
-        }
+
+        return false;
     }
+
     /**
-     * Extrae los médicos almacenados en la base de datos.
+     * Extrae todas las citas de un medico.
      * Para recorrerlo, puede extraerse uno por uno usando ejecutando
      * fetch_assoc() sobre el objeto
-     * @return mysqli_result 
+     * @return mysqli_result
      */
-    public function getRecetas($codigo_receta) {
+    public function getCitasDeMedico($codigo_medico) {
+        //set_include_path("C:\\xampp\\htdocs\\medik\\php");
+        include 'Cita.php';
+
         //Se prepara la sentencia SQL para extraer los pacientes
-        $sentencia = "select * from " . self::TABLA_RECETA;
+        $sentencia = "select * from " . self::TABLA_CITA
+                . " where " . Cita::COL_CODIGO_MEDICO . "=" . $codigo_medico;
+
+        //Se ejecuta la sentencia sql enviada y se guardan los resultados
+        $result = mysqli_query($this->conexion, $sentencia);
+
+        //Si se ejecutó correctamente y hay por lo menos una fila de resultados
+        if($result != false) {
+            if($result->num_rows > 0) {
+                //Se coloca el cursor de los resultados en el primer resultado
+                mysqli_data_seek($result, 0);
+
+                //Se develven los resultados
+                return $result;
+            }
+        }
         
+        return null;
+    }
+
+    /**
+     * Extrae las receta de una cita.
+     * Para recorrerlo, puede extraerse uno por uno usando ejecutando
+     * fetch_assoc() sobre el objeto
+     * @return mysqli_result
+     */
+    public function getRecetas($codigo_cita) {
+        //Se prepara la sentencia SQL para extraer los pacientes
+        $sentencia = "select * from " . self::TABLA_RECETA
+                . " where " . Receta::COL_CODIGO_CITA . "=" . $codigo_cita;
+
         //Se ejecuta la sentencia sql enviada y se guardan los resultados
         $result = mysqli_query($this->conexion, $sentencia);
 
@@ -189,9 +230,9 @@ class Database {
             return $result;
         }
         else {
-            return false;
+            return null;
         }
     }
-    
-    
+
+
 }
