@@ -20,7 +20,9 @@ echo "<table id=\"citastable\" border=\"1\" style=\"width:100%\">" . PHP_EOL;
         echo "<th>Medicamento</th>" . PHP_EOL;
         echo "<th>Dosis</th>" . PHP_EOL;
     echo "</tr>" . PHP_EOL;
-
+    
+    include 'database.php';
+    
     //Inicializando la base de datos
     $database = new \clases\Database();
 

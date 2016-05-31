@@ -101,7 +101,7 @@ class Database {
      */
     public function getPacientes() {
         //Se prepara la sentencia SQL para extraer los pacientes
-        $sentencia = "select * from " . self::TABLA_PACIENTE;
+        $sentencia = "select * from " . self::TABLA_PACIENTE . " order by " . Paciente::COL_NOMBRE_PACIENTE;
 
         //Se ejecuta la sentencia sql enviada y se guardan los resultados
         $result = mysqli_query($this->conexion, $sentencia);
@@ -157,7 +157,8 @@ class Database {
 
         //Se prepara la sentencia SQL para extraer los pacientes
         $sentencia = "select * from " . self::TABLA_CITA
-                . " where " . Cita::COL_CODIGO_PACIENTE . "=" . $codigo_paciente;
+                . " where " . Cita::COL_CODIGO_PACIENTE . "=" . $codigo_paciente
+                . " and " . Cita::COL_VISIBLE . "=" . \TRUE;
 
         //Se ejecuta la sentencia sql enviada y se guardan los resultados
         $result = mysqli_query($this->conexion, $sentencia);
@@ -183,12 +184,12 @@ class Database {
      * @return mysqli_result
      */
     public function getCitasDeMedico($codigo_medico) {
-        //set_include_path("C:\\xampp\\htdocs\\medik\\php");
-        include 'Cita.php';
+        //require 'Cita.php';
 
         //Se prepara la sentencia SQL para extraer los pacientes
-        $sentencia = "select * from " . self::TABLA_CITA
-                . " where " . Cita::COL_CODIGO_MEDICO . "=" . $codigo_medico;
+        $sentencia = "select * from " . self::TABLA_CITA .
+                " where " . \clases\Cita::COL_CODIGO_MEDICO . "=" . $codigo_medico .
+                " and " . \clases\Cita::COL_VISIBLE . "=" . \TRUE;
 
         //Se ejecuta la sentencia sql enviada y se guardan los resultados
         $result = mysqli_query($this->conexion, $sentencia);

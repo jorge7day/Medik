@@ -19,12 +19,6 @@ class Cita {
     CONST COL_ACTIVO = "activo";
     CONST COL_VISIBLE = "visible";
     
-    CONST ACTIVO = 1;
-    CONST INACTIVO = 0;
-    
-    CONST VISIBLE = 1;
-    CONST INVISIBLE = 0;
-    
     //INFORMACIÓN DE CITAS
 //    const tiempo_max = "01:00:00";
 //    const entrada_mañana = "09:00:00";
@@ -39,8 +33,8 @@ class Cita {
     public $f_cita = null;
     public $motivo = "";
     public $diagnostico = "";
-    private $activo = self::COL_ACTIVO;
-    private $visible = self::VISIBLE;
+    private $activo = True;
+    private $visible = true;
 
     /**
      * Para construir una cita, se necesita del código del médico, del código del paciente y del motivo de su cita
@@ -54,8 +48,8 @@ class Cita {
         
         $this->codigo_medico = 1;
         
-        $this->activo = self::ACTIVO;
-        $this->visible = self::VISIBLE;
+        $this->activo = TRUE;
+        $this->visible = TRUE;
     }
     
     function isActivo() {
@@ -74,16 +68,11 @@ class Cita {
     public function setState($activo) {
         $database = new Database();
         
-        //Si el usuario decide dejar el estado de la cita en Activa:
-        if($activo) {
-            //Se crea la sentencia para activar la cita
-            $sentencia = "update " . Database::TABLA_CITA 
-                    . " set " . self::COL_ACTIVO . "=" . self::ACTIVO 
-                    . " where " . self::COL_CODIGO_CITA . "=" . $this->codigo_cita;
-            
-            //Ejecuta la sentencia
-            return $database->execute($sentencia);
-        }
+        $sentencia = "update " . Database::TABLA_CITA .
+                " set " . self::COL_ACTIVO . "=" . ($activo?"1":"0") . 
+                " where " . self::COL_CODIGO_CITA . "=" . $this->codigo_cita;
+        
+        return $database->execute($sentencia);
     }
     
     /**
@@ -93,21 +82,10 @@ class Cita {
     public function setVisible($visible) {
         $database = new Database();
         
-        //Creando la sentencia a ejecutar
-        $sentencia = "";
-        
-        if($visible) {
-            //Se crea la sentencia para activar la cita
-            $sentencia = "update " . Database::TABLA_CITA 
-                    . " set " . self::COL_VISIBLE . "=" . self::VISIBLE 
-                    . " where " . self::COL_CODIGO_CITA . "=" . $this->codigo_cita;
-        }
-        else {
-            //Se crea la sentencia para activar la cita
-            $sentencia = "update " . Database::TABLA_CITA 
-                    . " set " . self::COL_VISIBLE . "=" . self::INVISIBLE 
-                    . " where " . self::COL_CODIGO_CITA . "=" . $this->codigo_cita;
-        }
+        //Se crea la sentencia para activar la cita
+        $sentencia = "update " . Database::TABLA_CITA .
+                " set " . self::COL_VISIBLE . "=" . ($visible?"1":"0") . 
+                " where " . self::COL_CODIGO_CITA . "=" . $this->codigo_cita;
         
         return $database->execute($sentencia);
     }
@@ -240,7 +218,7 @@ class Cita {
     /**
      * Hace una búsqueda de la cita proporcionada en la base de datos
      * @param int $codigo_cita
-     * @return mixed Devuelve el resultado de la BD, si lo encuentra, sino, NULL
+     * @return \Cita Devuelve el resultado de la BD, si lo encuentra, sino, NULL
      */
     public static function find($codigo_cita) {
         $database = new Database();
@@ -248,7 +226,22 @@ class Cita {
         //Creando sentencia de búsqueda
         $sentencia = "select * from " . Database::TABLA_CITA
                 . " where " . self::COL_CODIGO_CITA . "=" . $codigo_cita;
-
-        return $database->request($sentencia);
+        
+        $result = $database->request($sentencia);
+        
+        if($result != null) {
+            $row = mysqli_fetch_assoc($result);
+            
+            $cita = new Cita($row[self::COL_CODIGO_PACIENTE], $row[self::COL_MOTIVO]);
+            
+            $cita->codigo_cita = $row[self::COL_CODIGO_CITA];
+            $cita->f_cita = $row[self::COL_F_CITA];
+            $cita->codigo_medico = $row[self::COL_CODIGO_MEDICO];
+            $cita->diagnostico = $row[self::COL_DIAGNOSTICO];
+            $cita->activo = $row[self::COL_ACTIVO];
+            $cita->visible = $row[self::COL_VISIBLE];
+            
+            return $cita;
+        }
     }
 }

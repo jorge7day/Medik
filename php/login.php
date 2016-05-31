@@ -16,6 +16,8 @@ if(isset($_POST["nombre_usuario"]) && isset($_POST["contraseña"])) {
 
     //Creamos una instancia de la tabla credenciales
     $credenciales = new \clases\Credenciales($usuario, $contraseña);
+    
+    include 'database.php';
 
     //Hacemos la autenticación pertinente, y si no se pudo identificar, redirecciona al login
     if($credenciales->autentiq($usuario, $contraseña) == false) {

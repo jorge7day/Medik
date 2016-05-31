@@ -5,6 +5,41 @@ error_reporting(E_ERROR | E_PARSE);
 
 set_include_path("C:\\xampp\\htdocs\\medik\\php");
 include 'seq.php';
+require 'Cita.php';
+require 'Database.php';
+//use clases\Database;
+
+//Implementando operaciones de eliminación
+if(isset($_GET["op"])) {
+    $codigo_cita = $_GET["codigo_cita"];
+    
+    //Buscando la cita en la base de datos
+    $cita = \clases\Cita::find($codigo_cita);
+
+    //Si se econtró la cita
+    if($cita != null) {
+        
+    }
+    
+    switch ($_GET["op"]) {
+        case "+":
+            
+            break;
+        
+        case "x":
+            //Si se encontró la cita
+            if($cita != null) {
+                //Se procede a eliminar
+                $cita->setVisible(false);
+            }
+            break;
+        
+        default:
+            echo "OPERACIÓN NO DEFINIDA";
+    }
+    
+    header("Location: gestor_citas.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -46,6 +81,7 @@ include 'seq.php';
             </div>
             
             <?php
+                //include '../php/Database.php';
                 include 'templates/gestor_citas_contenido.php';
             ?>
             

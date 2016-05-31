@@ -4,7 +4,8 @@ use clases\Database;
 
 set_include_path("C:\\xampp\\htdocs\\medik\\php");
 
-include 'Paciente.php';
+require 'Paciente.php';
+require 'Database.php';
     
 //Instanciando la base de datos
 $database = new Database();
@@ -33,7 +34,8 @@ if($result) {
         echo '<td>' . ($paciente[\clases\Paciente::COL_SEXO_PACIENTE]==0?"Femenino":"Masculino") . '</td>' . PHP_EOL;
         echo '<td>' . date_format($date, "d/m/Y") . '</td>' . PHP_EOL; //Convertir la fecha en la BD en un Date de PHP
         echo '<td>' . ($paciente[\clases\Paciente::COL_TELEFONO_PACIENTE]!=null?$paciente[\clases\Paciente::COL_TELEFONO_PACIENTE]:"--") . '</td>' . PHP_EOL;
-        echo '<td><button onclick="crearCita(\'idpaciente\')" class="btn_con_img"><img id="img_btn" src="../files/add_icon.png"></button></td>' . PHP_EOL;
+        echo '<td><button class="btn_con_img"><a href="new_cita.php?id=' . $paciente[\clases\Paciente::COL_CODIGO_PACIENTE] . '"><img id="img_btn" src="../files/add_icon.png"></a></button></td>' . PHP_EOL;
+        //echo '<td><button onclick="crearCita(\'idpaciente\')" class="btn_con_img"><img id="img_btn" src="../files/add_icon.png"></button></td>' . PHP_EOL;
     }
         
     echo '</tr>';

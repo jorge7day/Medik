@@ -5,7 +5,7 @@
 <?php 
 set_include_path("C:\\xampp\\htdocs\\medik\\php");
 include 'Paciente.php';
-include 'Credenciales.php';
+require 'Database.php';
 
 
 //Comprueba si se ha enviado algún dato
@@ -14,12 +14,12 @@ if(isset($_POST["nombre"])) {
     $isReady = true;
     
     //Se prueba si los nombres poseen números o signos no válidos en los nombres
-    if(preg_match("/([\d]+|[^\w ])/", $_POST["nombre"]) === 1) {
+    if(preg_match("/([\d]+|[^\w áéíóúÁÉÍÓÚ]+)/", $_POST["nombre"]) === 1) {
         $isReady = false;
     }
     
     //Se prueba si el número de teléfono tiene un formato correcto
-    if(preg_match("/([\d]+|[^\w ])/", $_POST["nombre"]) === 1) {
+    if(preg_match("/([\d]{4}-[\d]{4})/", $_POST["telefono"]) != 1) {
         $isReady = false;
     }
     
@@ -28,18 +28,22 @@ if(isset($_POST["nombre"])) {
         $isReady = false;
     }
     
+    require 'Credenciales.php';
+
     //Comprobando que no exista el usuario entre las credeciales
-    if(Credenciales::find($_POST["usuario"])) {
+    if(\clases\Credenciales::find($_POST["usuario"])) {
         $isReady = false;
     }
     
     //Si no hay ninguna violación a las restricciones, el usuario se guardará
     if($isReady) {
+        //require 'Database.php';
+
         //Preparando la BD
-        $database = new Database();
+        $database = new \clases\Database();
         
         //Construyendo al nuevo paciente
-        $paciente = new Paciente();
+        $paciente = new \clases\Paciente();
         
         $paciente->nombre_paciente = $_POST["nombre"];
         $paciente->sexo_paciente = $_POST["sexo"];
@@ -50,15 +54,18 @@ if(isset($_POST["nombre"])) {
         $paciente->saveOnDB();
         
         //Construyendo sus credenciales
-        $credenciales = new Credenciales($_POST["usuario"], hash("sha256", $_POST["contraseña1"]));
+        $credenciales = new \clases\Credenciales($_POST["usuario"], hash("sha256", $_POST["contraseña1"]));
         
         //Buscando si existe al usuario recién creado
-        $temp = Paciente::findByName($paciente->nombre_paciente);
+        $temp = \clases\Paciente::findByName($paciente->nombre_paciente);
         
         $credenciales->codigo_usuario = $temp->codigo_paciente;
         
         //Guardando credenciales
-        echo $credenciales->saveOnDB();
+        $credenciales->saveOnDB();
+        
+        //Después de registrarse, se puede ir a iniciar sesión automáticamente
+        header("Location: ../index.php");
     }
 }
 ?>

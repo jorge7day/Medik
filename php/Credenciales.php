@@ -1,7 +1,7 @@
 <?php
 namespace clases;
 use clases\Database;
-include 'database.php';
+//include 'database.php';
 //use clases\Credenciales;
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -28,9 +28,6 @@ class Credenciales {
 
     public $tipo;
 
-    //Variable de conexion
-    private $database;
-
     //NOMBRE DE LAS COLUMNAS EN LA BD
     CONST COL_USUARIO = "usuario";
     CONST COL_CODIGO_MEDICO = "codigo_medico";
@@ -43,8 +40,6 @@ class Credenciales {
     function __construct($usuario, $contraseña) {
         $this->usuario = $usuario;
         $this->contraseña = $contraseña;
-
-        $this->database = new Database();
     }
 
     public function autentiq() {
@@ -76,10 +71,10 @@ class Credenciales {
         //include 'Database.php';
 
        //Creando objeto de la base de datos
-        $database = new Database();
+        $database = new \clases\Database();
 
         //Creando la sentencia de búsqueda de credenciales por usuario
-        $sentencia = "select * from " . Database::TABLA_CREDENCIALES
+        $sentencia = "select * from " . \clases\Database::TABLA_CREDENCIALES
                 . " where " . (self::COL_USUARIO) . "=\"" . $usuario . "\"";
 
         //Ejecuta la sentencia SQL en la BD

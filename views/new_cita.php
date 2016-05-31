@@ -1,27 +1,49 @@
 <?php
 namespace views;
-use clases\Credenciales;
+//use clases\Credenciales;
+use clases\Paciente;
+
+include '../php/credenciales.php';
+
 
 session_start();
 
     error_reporting(E_ERROR | E_PARSE);
     
     set_include_path("C:\\xampp\\htdocs\\medik\\php");
-    include 'seq.php';
+    require 'seq.php';
 
 
     //Verificando si el usuario ha intentado crear la cita ya
     if(isset($_POST["motivo"])) {
-        include 'cita.php';
+        require 'Cita.php';
+        
+        $id;
+        
+        if(isset($_SESSION["id"]) && $_SESSION["tipo"] == \clases\Credenciales::TIPO_MEDICO) {
+            $id = $_SESSION["id"];
+        }
+        else {
+            $id = $_SESSION["codigo"];
+        }
 
-        $cita = new \clases\Cita($_SESSION["codigo"], $_POST["motivo"]);
+        $cita = new \clases\Cita($id, $_POST["motivo"]);
 
         $cita->saveOnDB();
+        
+        if($_SESSION["tipo"] == \clases\Credenciales::TIPO_PACIENTE) {
+            header("location: mis_citas.php");
+        }
+        else {
+            header("location: pacientes.php");
 
-        header("location: mis_citas.php");
+        }
+        
+        unset($_SESSION["id"]);
     }
-    else {
-        //echo "El motivo ESTÁ vacío";
+    //Si no se pasaron parámetros por POST, se prueba si fueron pasados por GET
+    elseif(isset($_GET["id"])) {
+        $_SESSION["id"] = intval($_GET["id"]);
     }
 ?>
 <!DOCTYPE html>
@@ -38,13 +60,14 @@ session_start();
     <body>
         <section id="inicio">
             <?php
-            include 'templates/header.php';
+            require 'templates/header.php';
             ?>
             
             <?php
             session_start();
-            
-            include '../php/credenciales.php';
+            set_include_path("C:\\xampp\\htdocs\\medik\\php");
+            use clases\Credenciales;
+
             
             if($_SESSION["tipo"] == Credenciales::TIPO_MEDICO) {
                 include 'templates/menu_medico.php';

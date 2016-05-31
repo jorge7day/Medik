@@ -3,11 +3,10 @@ namespace templates;
 
 set_include_path("C:\\xampp\\htdocs\\medik\\php");
 use clases\Cita;
-use clases\Receta;
 use clases\Paciente;
 
-include 'paciente.php';
-//include 'receta.php';
+require 'Paciente.php';
+
 $database = new \clases\Database();
 
 $res = $database->getCitasDeMedico($_SESSION["codigo"]);
@@ -36,18 +35,10 @@ echo "<table id=\"citastable\" border=\"1\" style=\"width:100%\">" . PHP_EOL;
                 echo "<td>" . $row[Cita::COL_DIAGNOSTICO] . "</td>" . PHP_EOL;
             }
             else {
-                echo "<td><button onclick=\"agregarDiagnostico('idCita')\" class=\"btn_con_img\"><img id=\"img_btn\" src=\"../files/add_icon.png\"></button></td>" . PHP_EOL;
+                echo "<td><button class=\"btn_con_img\"><a href='gestor_citas.php?codigo_cita=" . $row[Cita::COL_CODIGO_CITA] . "&op=+'><img id=\"img_btn\" src=\"../files/add_icon.png\"></a></button></td>" . PHP_EOL;
             }
 
-            echo "<td><button onclick=\"?id=" . $row[Cita::COL_CODIGO_CITA] . "\" class=\"btn_con_img\"><img id=\"img_btn\" src=\"../files/borrar_icon.png\"></button></td>" . PHP_EOL;
+            echo "<td><button class=\"btn_con_img\"><a href='gestor_citas.php?codigo_cita=" . $row[Cita::COL_CODIGO_CITA] . "&op=x'><img id=\"img_btn\" src=\"../files/borrar_icon.png\"></a></button></td>" . PHP_EOL;
         echo "</tr>" . PHP_EOL;
-
-
-//        echo "<tr>" . PHP_EOL;
-//            echo "<td><a class=\"trcita\" href=\"cita.php?idcita=234\">Eve asdf asdf</a></td>" . PHP_EOL;
-//            echo "<td>94-45-1234</td>" . PHP_EOL;
-//            echo "<td>12:30 AM</td>" . PHP_EOL;
-//            echo "<td><button onclick=\"eliminarCita(id)\" class=\"btn_con_img\"><img id=\"img_btn\" src=\"../files/borrar_icon.png\"></button></td>" . PHP_EOL;
-//        echo "</tr>" . PHP_EOL;
     }
 echo "</table>" . PHP_EOL;
