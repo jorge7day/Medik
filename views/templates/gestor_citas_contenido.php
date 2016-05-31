@@ -35,7 +35,7 @@ echo "<table id=\"citastable\" border=\"1\" style=\"width:100%\">" . PHP_EOL;
                 echo "<td>" . $row[Cita::COL_DIAGNOSTICO] . "</td>" . PHP_EOL;
             }
             else {
-                echo "<td><button class=\"btn_con_img\"><a href='gestor_citas.php?codigo_cita=" . $row[Cita::COL_CODIGO_CITA] . "&op=+'><img id=\"img_btn\" src=\"../files/add_icon.png\"></a></button></td>" . PHP_EOL;
+                echo "<td><button class=\"btn_con_img\"><a href='gestor_citas.php?codigo_cita=" . $row[Cita::COL_CODIGO_CITA] . "&op=o'><img id=\"img_btn\" src=\"../files/add_icon.png\"></a></button></td>" . PHP_EOL;
             }
 
             echo "<td><button class=\"btn_con_img\"><a href='gestor_citas.php?codigo_cita=" . $row[Cita::COL_CODIGO_CITA] . "&op=x'><img id=\"img_btn\" src=\"../files/borrar_icon.png\"></a></button></td>" . PHP_EOL;

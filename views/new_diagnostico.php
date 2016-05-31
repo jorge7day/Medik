@@ -1,10 +1,56 @@
-<!DOCTYPE html>
 <?php
+namespace views;
     error_reporting(E_ERROR | E_PARSE);
     
     set_include_path("C:\\xampp\\htdocs\\medik\\php");
     include 'seq.php';
+    require 'cita.php';
+    require 'database.php';
+    require 'receta.php';
+    
+    use clases\Cita;
+    
+    //Incluyendo la funcionalidad de añadir diagnóstico
+    if(isset($_POST["diagnostico"]) && $_POST["diagnostico"] != "") {
+        //Extrayendo valores
+        $diagnostico = $_POST["diagnostico"];
+        $medicamento = $_POST["medicamento"];
+        $dosis = $_POST["dosis"];
+        
+        //Creando la variable que almacenará la cita
+        $codigo_cita;
+
+        //Si se accedió por la vía "legal", entonces debería haber una
+        //variable "codigo_cita" almacenada en la sesión, 
+        //Por lo que si está, continuará la ejecución, sino, no lo hará.
+        if(!isset($_SESSION["codigo_cita"])) {
+            return;
+        }
+        else {
+            $codigo_cita = $_SESSION["codigo_cita"];
+        }
+        
+        //Buscando la cita en la BD
+        $cita = \clases\Cita::find($codigo_cita);
+        
+        //Guardando el diagnóstico
+        //$cita->diagnostico = $diagnostico;
+        $cita->setDiagnostico($diagnostico);
+        
+        //Después de configuar la cita, se procede a crear la receta
+        $receta = new \clases\Receta($codigo_cita);
+        
+        $receta->medicamento = $medicamento;
+        $receta->dosis = $dosis;
+        
+        //Se procede a guardar el diagnóstico
+        $receta->saveOnDB();
+        
+        header("Location: gestor_citas.php");
+    }
 ?>
+<!DOCTYPE html>
+
 <html lang="es">
     <head>
         <meta charset="UTF-8">
@@ -26,7 +72,7 @@
             
             include '../php/credenciales.php';
             
-            if($_SESSION["tipo"] == Credenciales::TIPO_MEDICO) {
+            if($_SESSION["tipo"] == \clases\Credenciales::TIPO_MEDICO) {
                 include 'templates/menu_medico.php';
             }
             else {
@@ -41,43 +87,22 @@
                 <p>Agregar Diagnostico</p>
             </div>
             
-            <form action="" id="formularioc">
-                <p><b class="label">Nombre del paciente:</b> Jose ksdljf sdf<p>
-                <p><b class="label">Fecha de cita:</b> J1-2-1234<p>
-                <p><b class="label">Hora de cita:</b> 12:00 AM<p>
-                    
-                    <textarea placeholder="Agregar Diagnostico"></textarea>
-                    <textarea placeholder="Medicamento"></textarea>
-                    
-                    <input type="text" name="Dosis" placeholder="Dosis" size="75"required>
-                    
+            <form action="new_diagnostico.php" id="formularioc" method="post">
+                <?php
+                    include 'templates/new_diagnostico_contenido.php';
+                ?>
+                
+                <textarea name="diagnostico" placeholder="Agregar Diagnostico" required></textarea>
+                <textarea name="medicamento" placeholder="Medicamento"></textarea>
+                <input type="text" name="dosis" placeholder="Dosis" size="75">
+                
                 <div style="">
                     <input type="submit" id="enviar_btn">
-                    <input type="button" id="cancelar_btn" onclick="mostrarFormulario()" value="Cancelar">
+                    <input type="button" id="cancelar_btn" onclick="javascript:window.history.go(-1)" value="Cancelar">
                 </div>
             </form>
             
         </section>
-        
-        
-        
-        <!--
-        <section id="form" style="display:none">
-                <form action="" id="formulario">
-
-                        <p id="n2"> Crea tu cita</p>
-                        <input type="text" name="Nombre" placeholder="Nombre" required>
-                        <input type="number" name="edad" min="0" max="120" placeholder="Edad" required>
-                        <input type="text" name="ID" placeholder="Id de seguro" required>
-
-                        <div style="">
-                                <input type="submit" id="enviar_btn">
-                                <input type="button" id="cancelar_btn" onclick="mostrarFormulario()" value="Cancelar">
-                        </div>
-                </form>
-
-        </section>
-        -->
         
         <footer style="display:none">
             Derechos Reservados &copy; 2016-2020

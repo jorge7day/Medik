@@ -26,7 +26,7 @@
             
             include '../php/credenciales.php';
             
-            if($_SESSION["tipo"] == Credenciales::TIPO_MEDICO) {
+            if($_SESSION["tipo"] == \clases\Credenciales::TIPO_MEDICO) {
                 include 'templates/menu_medico.php';
             }
             else {

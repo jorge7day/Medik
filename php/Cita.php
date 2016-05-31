@@ -65,7 +65,7 @@ class Cita {
      * 
      * @param boolean $activo
      */
-    public function setState($activo) {
+    public function setActive($activo) {
         $database = new Database();
         
         $sentencia = "update " . Database::TABLA_CITA .
@@ -243,5 +243,25 @@ class Cita {
             
             return $cita;
         }
+    }
+    
+    public function setDiagnostico($diagnostico) {
+        //Creando la conexión hacia la BD
+        $database = new Database();
+        
+        //Creando la sentencia para insertar el diagnóstico
+        //a la cita correcta
+        $sentencia = "update " . Database::TABLA_CITA
+                . " set " . Cita::COL_DIAGNOSTICO . "='" . $diagnostico . "'"
+                . " where " . Cita::COL_CODIGO_CITA . "=" . $this->codigo_cita;
+        
+        if($database->execute($sentencia)) {
+            $this->diagnostico = $diagnostico;
+        }
+        
+        //Cuando el diagnóstico es ejecutado, no tiene sentido que la cita 
+        //siga apareciendo en los listados, por lo que se procede a ocultarla
+        $this->setVisible(false);
+        $this->setActive(false);
     }
 }

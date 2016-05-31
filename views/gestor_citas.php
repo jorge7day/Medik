@@ -15,22 +15,18 @@ if(isset($_GET["op"])) {
     
     //Buscando la cita en la base de datos
     $cita = \clases\Cita::find($codigo_cita);
-
-    //Si se econtró la cita
-    if($cita != null) {
-        
-    }
     
     switch ($_GET["op"]) {
-        case "+":
-            
+        case 'o':
+            header("location: new_diagnostico.php?cita=" . $codigo_cita);
             break;
         
-        case "x":
+        case 'x':
             //Si se encontró la cita
             if($cita != null) {
                 //Se procede a eliminar
                 $cita->setVisible(false);
+                header("Location: gestor_citas.php");
             }
             break;
         
@@ -38,7 +34,6 @@ if(isset($_GET["op"])) {
             echo "OPERACIÓN NO DEFINIDA";
     }
     
-    header("Location: gestor_citas.php");
 }
 ?>
 
