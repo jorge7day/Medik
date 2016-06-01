@@ -105,12 +105,16 @@ class Cita {
         //Se ejecuta la sentencia que extrae el último turno
         $res = $database->request($sentencia);
 
+        $row = mysqli_fetch_assoc($res);
+        
         //Ahora que se han obtenido todas las citas para ese día, hay que ver cuál es el turno más tardío
-        if($res == null) {
-            return null;
+        if($row["max(" . self::COL_F_CITA . ")"] == null) {
+            $fecha_mañana = date_create();
+            date_modify($fecha_mañana, "+1 day");
+            date_modify($fecha_mañana, "noon - 3 hour");
+            return $fecha_mañana;
         }
 
-        $row = mysqli_fetch_assoc($res);
 
         $fecha = date_create_from_format("Y-m-d H:i:s", $row["max(" . self::COL_F_CITA . ")"]);
         //////////////////////////////////////////

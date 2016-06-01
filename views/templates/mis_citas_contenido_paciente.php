@@ -51,7 +51,7 @@ echo "<table id=\"citastable\" border=\"1\" style=\"width:100%\">" . PHP_EOL;
 
                 if($res_recetas != null) {
                     //Conviertiendo la receta en resultados
-                    $receta = mysqli_fetch_assoc($res);
+                    $receta = mysqli_fetch_assoc($res_recetas);
                 }
                     //echo "<td>" . ($receta[Receta::COL_MEDICAMENTO]!=null?$receta[Receta::COL_MEDICAMENTO]:"---") . "</td>" . PHP_EOL;
                     echo "<td>" . $receta[Receta::COL_MEDICAMENTO] . "</td>" . PHP_EOL;

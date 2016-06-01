@@ -157,8 +157,7 @@ class Database {
 
         //Se prepara la sentencia SQL para extraer los pacientes
         $sentencia = "select * from " . self::TABLA_CITA
-                . " where " . Cita::COL_CODIGO_PACIENTE . "=" . $codigo_paciente
-                . " and " . Cita::COL_VISIBLE . "=" . \TRUE;
+                . " where " . Cita::COL_CODIGO_PACIENTE . "=" . $codigo_paciente;
 
         //Se ejecuta la sentencia sql enviada y se guardan los resultados
         $result = mysqli_query($this->conexion, $sentencia);
