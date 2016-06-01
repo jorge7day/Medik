@@ -76,7 +76,6 @@ if(isset($_GET["op"])) {
             </div>
             
             <?php
-                //include '../php/Database.php';
                 include 'templates/gestor_citas_contenido.php';
             ?>
             

@@ -85,8 +85,6 @@ session_start();
             </div>
             
             <form action="new_cita.php" id="formularioc" method="post">
-<!--				<input type="text" name="Nombre" placeholder="Nombre" required>-->
-<!--				<input type="number" name="edad" min="0" max="120" placeholder="Edad" required>-->
                 <input type="textarea" name="motivo" placeholder="Motivo" required>
                 
                 <div style="">

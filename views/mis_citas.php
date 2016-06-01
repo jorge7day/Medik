@@ -1,11 +1,11 @@
-
-<!DOCTYPE html>
 <?php
     error_reporting(E_ERROR | E_PARSE);
     
     set_include_path("C:\\xampp\\htdocs\\medik\\php");
     include 'seq.php';
 ?>
+
+<!DOCTYPE html>
 <html lang="es">
     <head>
         <meta charset="UTF-8">
@@ -53,26 +53,6 @@
             ?>
             
         </section>
-        
-        
-        
-        <!--
-        <section id="form" style="display:none">
-                <form action="" id="formulario">
-
-                        <p id="n2"> Crea tu cita</p>
-                        <input type="text" name="Nombre" placeholder="Nombre" required>
-                        <input type="number" name="edad" min="0" max="120" placeholder="Edad" required>
-                        <input type="text" name="ID" placeholder="Id de seguro" required>
-
-                        <div style="">
-                                <input type="submit" id="enviar_btn">
-                                <input type="button" id="cancelar_btn" onclick="mostrarFormulario()" value="Cancelar">
-                        </div>
-                </form>
-
-        </section>
-        -->
         
         <footer style="display:none">
             Derechos Reservados &copy; 2016-2020

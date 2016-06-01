@@ -99,8 +99,7 @@ if(isset($_POST["nombre"])) {
                     <br>
                     <input type="text" name="telefono" placeholder="Teléfono (XXXX-XXXX)" size="75" required>
                     <br>
-<!--                    <input type="text" name="direccion" placeholder="Dirección" size="75" required>
-                    <br><br>-->
+                    
                     <input type="text" name="usuario" placeholder="USUARIO" size="75" required>
                     <br>
                     <input type="password" name="contraseña1" placeholder="Contraseña" size="75" required>
